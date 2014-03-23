@@ -33,16 +33,16 @@
 				</div>
 				<div>
 					<div class="input-append">
-						<label>* <spring:message code="videos.email" />:
+						<label>* <spring:message code="videos.class" />:
 						</label>
 					</div>
 					<div class="input-append">
-						<input type="text" required ng-model="video.email" name="email"
-							placeholder="<spring:message code='sample.email'/> " />
+						<input type="text" required ng-model="video.class" name="class"
+							placeholder="<spring:message code='sample.class'/> " />
 					</div>
 					<div class="input-append">
 						<label> <span class="alert alert-error"
-							ng-show="displayValidationError && newVideoForm.email.$error.required">
+							ng-show="displayValidationError && newVideoForm.class.$error.required">
 								<spring:message code="required" />
 						</span>
 						</label>
@@ -50,17 +50,105 @@
 				</div>
 				<div>
 					<div class="input-append">
-						<label>* <spring:message code="videos.phone" />:
+						<label>* <spring:message code="videos.uploadDate" />:
 						</label>
 					</div>
 					<div class="input-append">
-						<input type="text" required ng-model="video.phoneNumber"
-							name="phoneNumber"
-							placeholder="<spring:message code='sample.phone'/> " />
+						<input type="text" required ng-model="video.uploadDate"
+							name="uploadDate"
+							placeholder="<spring:message code='sample.uploadDate'/> " />
 					</div>
 					<div class="input-append">
 						<label> <span class="alert alert-error"
-							ng-show="displayValidationError && newVideoForm.phoneNumber.$error.required">
+							ng-show="displayValidationError && newVideoForm.uploadDate.$error.required">
+								<spring:message code="required" />
+						</span>
+						</label>
+					</div>
+				</div>
+				<div>
+					<div class="input-append">
+						<label>* <spring:message code="videos.eventDate" />:
+						</label>
+					</div>
+					<div class="input-append">
+						<input type="text" required ng-model="video.eventDate" name="eventDate"
+							placeholder="<spring:message code='sample.eventDate'/> " />
+					</div>
+					<div class="input-append">
+						<label> <span class="alert alert-error"
+							ng-show="displayValidationError && newVideoForm.eventDate.$error.required">
+								<spring:message code="required" />
+						</span>
+						</label>
+					</div>
+				</div>
+				<div>
+					<div class="input-append">
+						<label>* <spring:message code="videos.eventYear" />:
+						</label>
+					</div>
+					<div class="input-append">
+						<input type="text" required ng-model="video.eventYear" name="eventeventYear"
+							placeholder="<spring:message code='sample.eventYear'/> " />
+					</div>
+					<div class="input-append">
+						<label> <span class="alert alert-error"
+							ng-show="displayValidationError && newVideoForm.eventDate.$error.required">
+								<spring:message code="required" />
+						</span>
+						</label>
+					</div>
+				</div>
+				<div>
+					<div class="input-append">
+						<label>* <spring:message code="videos.videoPath" />:
+						</label>
+					</div>
+					<div class="input-append">
+						<input type="text" required ng-model="video.videoPath"
+							name="videoPath"
+							placeholder="<spring:message code='sample.videoPath'/> " />
+					</div>
+					<div class="input-append">
+						<label> <span class="alert alert-error"
+							ng-show="displayValidationError && newVideoForm.videoPath.$error.required">
+								<spring:message code="required" />
+						</span>
+						</label>
+					</div>
+				</div>
+				<div>
+					<div class="input-append">
+						<label>* <spring:message code="videos.duration" />:
+						</label>
+					</div>
+					<div class="input-append">
+						<input type="text" required ng-model="video.duration"
+							name="duration"
+							placeholder="<spring:message code='sample.duration'/> " />
+					</div>
+					<div class="input-append">
+						<label> <span class="alert alert-error"
+							ng-show="displayValidationError && newVideoForm.duration.$error.required">
+								<spring:message code="required" />
+						</span>
+						</label>
+					</div>
+				</div>
+				<div>
+					<div class="input-append">
+						<label>* <spring:message code="videos.resolution" />:
+						</label>
+					</div>
+					<div class="input-append">
+						<input type="text" required ng-model="video.resolution"
+							name="resolution"
+							placeholder="<spring:message code='sample.resolution'/> " />
+					</div>
+					<div class="input-append">
+						<label> <span class="alert alert-error"
+							ng-show="displayValidationError && newVideoForm.resolution.$error.required">
 								<spring:message code="required" />
 						</span>
 						</label>
@@ -118,39 +206,22 @@
 				</div>
 				<div>
 					<div class="input-append">
-						<label>* <spring:message code="videos.email" />:
+						<label>* <spring:message code="videos.class" />:
 						</label>
 					</div>
 					<div class="input-append">
-						<input type="text" required ng-model="video.email" name="email"
-							placeholder="<spring:message code='sample.email'/> " />
+						<input type="text" required ng-model="video.class" name="class"
+							placeholder="<spring:message code='sample.class'/> " />
 					</div>
 					<div class="input-append">
 						<label> <span class="alert alert-error"
-							ng-show="displayValidationError && updateVideoForm.email.$error.required">
+							ng-show="displayValidationError && updateVideoForm.class.$error.required">
 								<spring:message code="required" />
 						</span>
 						</label>
 					</div>
 				</div>
-				<div>
-					<div class="input-append">
-						<label>* <spring:message code="videos.phone" />:
-						</label>
-					</div>
-					<div class="input-append">
-						<input type="text" required ng-model="video.phoneNumber"
-							name="phoneNumber"
-							placeholder="<spring:message code='sample.phone'/> " />
-					</div>
-					<div class="input-append">
-						<label> <span class="alert alert-error"
-							ng-show="displayValidationError && updateVideoForm.phoneNumber.$error.required">
-								<spring:message code="required" />
-						</span>
-						</label>
-					</div>
-				</div>
+				
 				<input type="submit" class="btn btn-inverse"
 					ng-click="updateVideo(updateVideoForm);"
 					value='<spring:message code="update"/>' />

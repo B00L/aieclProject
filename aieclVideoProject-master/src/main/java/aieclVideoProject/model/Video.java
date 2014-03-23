@@ -17,30 +17,31 @@ public class Video {
 	private String name;
 	private String videoClass;
 	private String uploadDate;
+	private String eventDate;
+	private int eventYear;
 	private int viewCount;
 	private String videoPath;
 	private String duration;
-	private String videoResolution;	
+	private String resolution;	
 
 	public Video() {
 		
 	}
 
-	public Video(int id, String name, String videoClass, String uploadDate,
-			int viewCount, String videoPath, String duration,
-			String videoResolution) {
+	public Video(String name, String videoClass, String uploadDate,
+			String eventDate, int eventYear, int viewCount, String videoPath,
+			String duration, String resolution) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.videoClass = videoClass;
 		this.uploadDate = uploadDate;
+		this.eventDate = eventDate;
+		this.eventYear = eventYear;
 		this.viewCount = viewCount;
 		this.videoPath = videoPath;
 		this.duration = duration;
-		this.videoResolution = videoResolution;
+		this.resolution = resolution;
 	}
-
-
 
 	public int getId() {
 		return id;
@@ -98,12 +99,29 @@ public class Video {
 		this.duration = duration;
 	}
 
-	public String getVideoResolution() {
-		return videoResolution;
+	public String getResolution() {
+		return resolution;
 	}
 
-	public void setVideoResolution(String videoResolution) {
-		this.videoResolution = videoResolution;
+	public void setResolution(String resolution) {
+		this.resolution = resolution;
+	}
+	
+
+	public String getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(String eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	public int getEventYear() {
+		return eventYear;
+	}
+
+	public void setEventYear(int eventYear) {
+		this.eventYear = eventYear;
 	}
 
 	@Override
