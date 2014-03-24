@@ -9,22 +9,27 @@
 			<param name="ConversionPattern" value="%-5p [%c] [%X{msisdn}] %t %m%n" />
 		</layout>
 	</appender>
-	<!-- <logger name="org.hibernate.SQL"> <level value="INFO" /> </logger> 
-		<logger name="org.eclipse.jetty.webapp.WebAppClassLoader"> <level value="INFO" 
-		/> </logger> <logger name="aieclVideoProject.controller"> <level value="INFO" 
-		/> </logger> <logger name="com.events.log.RequestLogFilter"> <level value="INFO" 
-		/> <appender-ref ref="FILE" /> <appender-ref ref="ASYNC" /> </logger> <logger 
-		name="com.events.log.SessionListener"> <level value="INFO" /> <appender-ref 
-		ref="FILE" /> <appender-ref ref="ASYNC" /> </logger> <logger name="org.springframework.web"> 
-		<level value="trace" /> </logger> -->
-
-	<logger name="aieclVideoProject.controller.LoginController.logger">
-		<level value="info" />
+	<logger name="org.hibernate.SQL"> <level value="INFO" /> </logger> 
+	<logger name="org.eclipse.jetty.webapp.WebAppClassLoader"> <level value="INFO" /> </logger> 
+	<logger name="aieclVideoProject.controller"> <level value="INFO" /> </logger> 
+	<logger name="com.events.log.RequestLogFilter"> <level value="INFO" /> 
+		<appender-ref ref="FILE" /> 
+		<appender-ref ref="ASYNC" /> 
+	</logger> 
+	<logger name="com.events.log.SessionListener"> <level value="INFO" /> 
+		<appender-ref ref="FILE" /> 
+		<appender-ref ref="ASYNC" /> 
+	</logger> 
+	<logger name="org.springframework.web"> 
+		<level value="trace" /> 
 	</logger>
 
-	<logger name="aieclVideoProject.interceptor.LoginInterceptor.logger">
-		<level value="info" />
-	</logger>
+<!-- 	<logger name="aieclVideoProject.controller.LoginController.logger"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
+<!-- 	<logger name="aieclVideoProject.interceptor.LoginInterceptor.logger"> -->
+<!-- 		<level value="info" /> -->
+<!-- 	</logger> -->
 
 	<!-- Root Logger -->
 	<root>

@@ -13,6 +13,7 @@
 			<mvc:mapping path="/protected/**" />
 			<bean class="aieclVideoProject.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
+
 		<!-- workaround to fix IE8 problem -->
 		<bean id="webContentInterceptor"
 			class="org.springframework.web.servlet.mvc.WebContentInterceptor">
@@ -36,14 +37,21 @@
 	</bean>
 
 	<!-- i18n -->
+	<mvc:interceptors>
+	    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	        <property name="paramName" value="lang" />
+	    </bean>
+	</mvc:interceptors>
+	
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="WEB-INF/i18n" />
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="useCodeAsDefaultMessage" value="true" />
 	</bean>
+	
 	<bean id="localeResolver"
-		class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="en" />
 	</bean>
 

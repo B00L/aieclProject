@@ -5,6 +5,11 @@
 <div class="masthead">
 	<h3 class="muted">
 		<spring:message code='header.message' />
+		<span style="float: right">
+		    <a href="?lang=en">en</a>
+		    |
+		    <a href="?lang=fr">fr</a>
+		</span>
 	</h3>
 
 	<div class="navbar">
