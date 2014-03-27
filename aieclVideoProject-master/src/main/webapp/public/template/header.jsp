@@ -26,12 +26,6 @@
 					</a>
 					</li>
 					<li
-						ng-class="{'gray': activeURL == 'contacts', '': activeURL != 'contacts'}"><a
-						title='<spring:message code="header.contacts"/>'
-						href="<c:url value='/protected/contacts'/>"><p>
-								<spring:message code="header.contacts" />
-							</p></a></li>
-					<li
 						ng-class="{'gray': activeURL == 'videos', '': activeURL != 'videos'}"><a
 						title='<spring:message code="header.videos"/>'
 						href="<c:url value='/protected/videos'/>"><p>
