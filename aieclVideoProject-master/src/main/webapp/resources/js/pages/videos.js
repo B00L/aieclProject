@@ -192,7 +192,6 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 		$scope.startDialogAjaxRequest();
 
 		var config = {};
-
 		$scope.addSearchParametersIfNeeded(config, false);
 
 		$http.put(url, $scope.video, config).success(function(data) {
@@ -214,11 +213,8 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 
 		$scope.startDialogAjaxRequest();
 
-		var config = {};
-
-		if ($scope.searchFor) {
-			$scope.addSearchParametersIfNeeded(config, isPagination);
-		}
+		var config = {};		
+		$scope.addSearchParametersIfNeeded(config, isPagination);
 
 		$http.get(url, config)
 			.success(function(data) {
@@ -237,16 +233,11 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 
 		$scope.startDialogAjaxRequest();
 
-		var params = {
-			searchFor : $scope.searchFor,
-			page : $scope.pageToGet
-		};
+		var config = {};		
+		$scope.addSearchParametersIfNeeded(config, false);
 
-		$http({
-			method : 'DELETE',
-			url : url,
-			params : params
-		}).success(function(data) {
+		$http.delete(url, config)
+		.success(function(data) {
 			$scope.resetVideo();
 			$scope.finishAjaxCallOnSuccess(data, "#deleteVideosModal", false);
 		}).error(function(data, status, headers, config) {
