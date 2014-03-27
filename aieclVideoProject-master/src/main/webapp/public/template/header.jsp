@@ -31,6 +31,13 @@
 						href="<c:url value='/protected/videos'/>"><p>
 								<spring:message code="header.videos" />
 							</p></a></li>
+							
+					<li
+						ng-class="{'gray': activeURL == 'about', '': activeURL != 'about'}"><a
+						title='<spring:message code="header.about"/>'
+						href="<c:url value='/protected/about'/>"><p>
+								<spring:message code="header.about" />
+							</p></a></li>
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="<c:url value='/logout' />"
