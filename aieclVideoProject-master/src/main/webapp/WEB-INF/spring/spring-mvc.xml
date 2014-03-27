@@ -65,6 +65,7 @@
 				<entry key="json" value="application/json" />
 				<entry key="html" value="text/html" />
 				<entry key="less" value="text/html" />
+				<entry key="mp4" value="video/mp4"/>
 			</map>
 		</property>
 		<property name="viewResolvers">

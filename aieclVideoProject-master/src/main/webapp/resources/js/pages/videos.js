@@ -1,4 +1,6 @@
-function videosController($scope, $http) {
+var videocatControllers = angular.module('videocatControllers', []);
+
+videocatControllers.controller('videosController', ['$scope', '$http', function($scope, $http) {
 	$scope.pageToGet = 0;
 
 	$scope.state = 'busy';
@@ -260,4 +262,4 @@ function videosController($scope, $http) {
 	};
 
 	$scope.getVideoList();
-}
+}]);

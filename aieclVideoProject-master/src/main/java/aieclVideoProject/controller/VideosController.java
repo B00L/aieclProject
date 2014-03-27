@@ -2,6 +2,7 @@ package aieclVideoProject.controller;
 
 import java.util.Locale;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import aieclVideoProject.model.Video;
@@ -163,5 +165,15 @@ public class VideosController {
         return !StringUtils.isEmpty(searchFor);
     }
 	
+    
+    //Tests
+    @RequestMapping("/greeting")
+    public @ResponseBody Video greeting() {
+        Video v = new Video();
+        v.setName("bla"+RandomStringUtils.random(0));
+        v.setVideoPath("videosFiles/TestVid.mp4");
+    	return v;
+    }
+    
 }
 
