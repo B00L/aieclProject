@@ -150,7 +150,7 @@ html,body {
 	height: 19px;
 }
 
-#contactsHeaderButton {
+#videosHeaderButton {
 	margin-left: 7px;
 }
 
@@ -169,7 +169,7 @@ html,body {
 	text-shadow: none;
 }
 
-.tdContactsCentered {
+.tdVideosCentered {
 	vertical-align: middle;
 }
 
@@ -190,13 +190,13 @@ html,body {
 	margin-left: 10px;
 }
 
-#deleteContactsModal {
+#deleteVideosModal {
 	width: 500px;
 	height: 220px;
 	overflow: hidden;
 }
 
-#searchContactsModal {
+#searchVideosModal {
 	width: 500px;
 	height: 180px;
 	overflow: hidden;
