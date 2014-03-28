@@ -57,6 +57,17 @@ public class VideoService {
 
         return videoRepository.findByNameLike(pageRequest, "%" + name + "%");
 	}
+	
+	@Transactional(readOnly=true)
+	public VideoListVO findById(String id) {
+		Page<Video> result = executeQueryFindById(id);
+		
+		return buildResult(result);
+	}
+	
+	private Page<Video> executeQueryFindById(String id) {
+        return videoRepository.findById("%" + id + "%");
+	}
 
 	private VideoListVO buildResult(Page<Video> result) {
 		return new VideoListVO(result.getTotalPages(), result.getTotalElements(), result.getContent());
