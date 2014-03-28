@@ -18,6 +18,10 @@
 <script src="<c:url value="/resources/js/pages/videos.js" />"></script>
 </head>
 <body>
+	<div id="header-wrapper">
+            
+	</div>
+
 	<div class="container">
 		<tiles:insertAttribute name="header" />
 
