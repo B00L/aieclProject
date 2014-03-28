@@ -1,7 +1,5 @@
 package aieclVideoProject.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -16,7 +14,7 @@ import aieclVideoProject.model.Video;
 import aieclVideoProject.service.VideoService;
 
 @Controller
-@RequestMapping(value = "protected/video")
+@RequestMapping(value = "protected/videoView")
 public class VideoController {
 	
 	@Autowired
@@ -27,7 +25,7 @@ public class VideoController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView welcome(){
-		return new ModelAndView("videoDetail");
+		return new ModelAndView("videoView");
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")

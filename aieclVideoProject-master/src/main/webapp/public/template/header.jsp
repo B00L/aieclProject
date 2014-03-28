@@ -33,11 +33,24 @@
 							</p></a></li>
 							
 					<li
+						ng-class="{'active': activeURL == 'videoView', '': activeURL != 'videoView'}">
+						<a href="<c:url value="/protected/videoView"/>"
+						title='<spring:message code="header.videoView"/>'>
+							<p>
+								<spring:message code="header.videoView" />
+							</p>
+					</a>
+					</li>
+					
+					<li
 						ng-class="{'gray': activeURL == 'about', '': activeURL != 'about'}"><a
 						title='<spring:message code="header.about"/>'
 						href="<c:url value='/protected/about'/>"><p>
 								<spring:message code="header.about" />
 							</p></a></li>
+							
+					
+					
 				</ul>
 				<ul class="nav pull-right">
 					<li><a href="<c:url value='/logout' />"

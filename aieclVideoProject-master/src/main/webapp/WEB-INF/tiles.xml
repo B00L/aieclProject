@@ -18,8 +18,8 @@
 		<put-attribute name="body" value="/protected/about.jsp" />
 	</definition>
 	
-	<definition name="videoDetail" extends="master.page">
-		<put-attribute name="body" value="/protected/videosView/videoDetail.jsp" />
+	<definition name="videoView" extends="master.page">
+		<put-attribute name="body" value="/protected/videosView/videoView.jsp" />
 	</definition>
 
 	<definition name="videosAdmin" extends="master.page">

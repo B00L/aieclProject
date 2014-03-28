@@ -26,7 +26,7 @@ import aieclVideoProject.vo.VideoListVO;
 
 @Controller
 @RequestMapping(value= "protected/videosAdmin")
-public class VideosController {
+public class VideosAdminController {
 	private static final String DEFAULT_PAGE_DISPLAYED_TO_USER = "0";
 	
 	@Autowired
