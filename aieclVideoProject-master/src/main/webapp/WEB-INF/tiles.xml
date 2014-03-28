@@ -17,6 +17,10 @@
 	<definition name="about" extends="master.page">
 		<put-attribute name="body" value="/protected/about.jsp" />
 	</definition>
+	
+	<definition name="videoDetail" extends="master.page">
+		<put-attribute name="body" value="/protected/videoDetail.jsp" />
+	</definition>
 
 	<definition name="videosList" extends="master.page">
 		<put-attribute name="body" value="/protected/videos/videos.jsp" />
