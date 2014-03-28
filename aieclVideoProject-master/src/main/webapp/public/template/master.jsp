@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!doctype html>
-<html id="ng-app" ng-app="AIECL-App">
+<html id="ng-app" ng-app="angularJSApp">
 <head>
 <title><spring:message code="project.title" /></title>
 <link href="<c:url value='/resources/css/bootstrap.min.css'  />"
@@ -15,7 +15,8 @@
 <script src="<c:url value='/resources/js/jquery-1.9.1.min.js' />"></script>
 <script src="<c:url value='/resources/js/angular.min.js' />"></script>
 <script src="<c:url value="/resources/js/pages/app.js" />"></script>
-<script src="<c:url value="/resources/js/pages/videos.js" />"></script>
+<script src="<c:url value="/resources/js/pages/videosAdmin.js" />"></script>
+<script src="<c:url value="/resources/js/pages/videosView.js" />"></script>
 </head>
 <body>
 	<div id="header-wrapper">

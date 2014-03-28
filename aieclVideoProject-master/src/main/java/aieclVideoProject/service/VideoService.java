@@ -59,14 +59,8 @@ public class VideoService {
 	}
 	
 	@Transactional(readOnly=true)
-	public VideoListVO findById(String id) {
-		Page<Video> result = executeQueryFindById(id);
-		
-		return buildResult(result);
-	}
-	
-	private Page<Video> executeQueryFindById(String id) {
-        return videoRepository.findById("%" + id + "%");
+	public Video findById(Integer id) {
+		return videoRepository.findOne(id);
 	}
 
 	private VideoListVO buildResult(Page<Video> result) {

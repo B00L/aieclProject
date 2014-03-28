@@ -25,7 +25,7 @@ import aieclVideoProject.service.VideoService;
 import aieclVideoProject.vo.VideoListVO;
 
 @Controller
-@RequestMapping(value= "protected/videos")
+@RequestMapping(value= "protected/videosAdmin")
 public class VideosController {
 	private static final String DEFAULT_PAGE_DISPLAYED_TO_USER = "0";
 	
@@ -40,7 +40,7 @@ public class VideosController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView welcome(){
-		return new ModelAndView("videosList");
+		return new ModelAndView("videosAdmin");
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")

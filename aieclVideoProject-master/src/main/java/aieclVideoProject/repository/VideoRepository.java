@@ -10,4 +10,6 @@ import aieclVideoProject.model.Video;
 @Repository
 public interface VideoRepository  extends PagingAndSortingRepository<Video, Integer>{
 	Page<Video> findByNameLike(Pageable pageable, String name);
+
+	//Page<Video> findById(Pageable pageable, String id);
 }

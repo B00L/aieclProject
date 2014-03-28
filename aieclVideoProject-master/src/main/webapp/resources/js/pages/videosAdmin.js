@@ -1,13 +1,13 @@
-var videocatControllers = angular.module('videocatControllers', []);
+var videoAdminControllers = angular.module('videoAdminControllers', []);
 
-videocatControllers.controller('videosController', ['$scope', '$http', function($scope, $http) {
+videoAdminControllers.controller('videosController', ['$scope', '$http', 'mySharedService', function($scope, $http, sharedService) {
 	$scope.pageToGet = 0;
 
 	$scope.state = 'busy';
 
 	$scope.lastAction = '';
 
-	$scope.url = "/aieclVideoProject/protected/videos/";
+	$scope.url = "/aieclVideoProject/protected/videosAdmin/";
 
 	$scope.errorOnSubmit = false;
 	$scope.errorIllegalAccess = false;
@@ -28,9 +28,9 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 		$scope.startDialogAjaxRequest();
 
 		var config = {
-			params : {
-				page : $scope.pageToGet
-			}
+				params : {
+					page : $scope.pageToGet
+				}
 		};
 
 		$http.get(url, config).success(function(data) {
@@ -46,10 +46,10 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 			$scope.state = 'list';
 
 			$scope.page = {
-				source : data.videos,
-				currentPage : $scope.pageToGet,
-				pagesCount : data.pagesCount,
-				totalVideos : data.totalVideos
+					source : data.videos,
+					currentPage : $scope.pageToGet,
+					pagesCount : data.pagesCount,
+					totalVideos : data.totalVideos
 			};
 
 			if ($scope.page.pagesCount <= $scope.page.currentPage) {
@@ -158,9 +158,9 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 		var url = $scope.url;
 
 		var config = {
-			headers : {
-				'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-			}
+				headers : {
+					'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+				}
 		};
 
 		$scope.addSearchParametersIfNeeded(config, false);
@@ -217,13 +217,13 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 		$scope.addSearchParametersIfNeeded(config, isPagination);
 
 		$http.get(url, config)
-			.success(function(data) {
-				$scope.finishAjaxCallOnSuccess(data, "#searchVideosModal",
+		.success(function(data) {
+			$scope.finishAjaxCallOnSuccess(data, "#searchVideosModal",
 					isPagination);
-				$scope.displaySearchMessage = true;
-			}).error(function(data, status, headers, config) {
-				$scope.handleErrorInDialogs(status);
-			});
+			$scope.displaySearchMessage = true;
+		}).error(function(data, status, headers, config) {
+			$scope.handleErrorInDialogs(status);
+		});
 	};
 
 	$scope.deleteVideo = function() {
@@ -251,6 +251,16 @@ videocatControllers.controller('videosController', ['$scope', '$http', function(
 		$scope.getVideoList();
 		$scope.displaySearchMessage = false;
 	};
+	
+	$scope.handleClick = function(video) {
+		sharedService.prepForBroadcast(video);
+    };
+        
+    $scope.$on('handleBroadcast', function() {
+        $scope.video = sharedService.video;
+    });
 
 	$scope.getVideoList();
 }]);
+
+

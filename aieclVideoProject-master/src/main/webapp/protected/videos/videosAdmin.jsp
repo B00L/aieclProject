@@ -5,7 +5,7 @@
 <div class="row-fluid" ng-controller="videosController">
 	<h2>
 		<p class="text-center">
-			<spring:message code='videos.header' />
+			<spring:message code='videos.adminHeader' />
 			<a href="#searchVideosModal" id="videosHeaderButton" role="button"
 				ng-class="{'': displaySearchButton == true, 'none': displaySearchButton == false}"
 				title="<spring:message code="search"/>&nbsp;<spring:message code="video"/>"
@@ -96,7 +96,12 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="video in page.source">
-						<td class="tdVideosCentered">{{video.name}}</td>
+						<td class="tdVideosCentered">
+							<a title='videoDetail'
+								href="<c:url value='/protected/video'/>" ng-click="handleClick(video);"><p>
+								{{video.name}}
+							</p></a>
+						</td>
 						<td class="tdVideosCentered">{{video.uploadDate}}</td>
 						<td class="tdVideosCentered">{{video.viewCount}}</td>
 						<td class="tdVideosCentered">{{video.duration}}</td>
@@ -165,4 +170,4 @@
 	</div>
 </div>
 
-<script src="<c:url value="/resources/js/pages/videos.js" />"></script>
+<script src="<c:url value="/resources/js/pages/videosAdmin.js" />"></script>

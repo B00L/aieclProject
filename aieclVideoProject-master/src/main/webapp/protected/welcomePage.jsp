@@ -15,6 +15,11 @@
 		<p class="lead">
 			<spring:message code='welcomePage.featuredVideo' />
 		</p>
+		
+		<a title='videoDetail'
+						href="<c:url value='/protected/video'/>"><p>
+								Video Detail
+		</p></a>
 
 		<video src="videosFiles/TestVid.mp4" width="720" controls>
 		</video>

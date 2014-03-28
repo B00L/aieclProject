@@ -26,10 +26,10 @@
 					</a>
 					</li>
 					<li
-						ng-class="{'gray': activeURL == 'videos', '': activeURL != 'videos'}"><a
-						title='<spring:message code="header.videos"/>'
-						href="<c:url value='/protected/videos'/>"><p>
-								<spring:message code="header.videos" />
+						ng-class="{'gray': activeURL == 'videosAdmin', '': activeURL != 'videosAdmin'}"><a
+						title='<spring:message code="header.videosAdmin"/>'
+						href="<c:url value='/protected/videosAdmin'/>"><p>
+								<spring:message code="header.videosAdmin" />
 							</p></a></li>
 							
 					<li
