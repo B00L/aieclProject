@@ -2,18 +2,49 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<div>
+	<!--Barre de recherche-->       
+	Rechercher: <input ng-model="query">
+	Trier par:
+	<select ng-model="orderProp">
+	    <option value="name">Par ordre alphabétique</option>
+	    <option value="age">Le plus récent en premier</option>
+	</select>
+</div>
+
+<div>
+    <!--Body content-->
+
+    <ul class="videos">
+        <li ng-repeat="video in videos| filter:query | orderBy:orderProp" class="thumbnail">
+            <div class="row">
+                <div class="4u">
+                    <section>
+                        <div>
+                            <div class="image-style1">
+                                <a href="#/videos/{{video.id}}" ng-click="handleClick(video);">
+                                    <img width="140" ng-src="{{video.imageUrl}}">
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+                <div class="8u">
+                    <section id="content">
+                        <a href="#/videos/{{video.id}}" ng-click="handleClick(video);">{{video.name}}</a>
+                        <p class="subtitle">{{video.snippet}}</p>
+                    </section>     
+                </div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+
 <div class="row-fluid" ng-controller="videosController">
-	<h2>
-		<p class="text-center">
-			<spring:message code='videos.adminHeader' />
-			<a href="#searchVideosModal" id="videosHeaderButton" role="button"
-				ng-class="{'': displaySearchButton == true, 'none': displaySearchButton == false}"
-				title="<spring:message code="search"/>&nbsp;<spring:message code="video"/>"
-				class="btn btn-inverse" data-toggle="modal"> <i
-				class="icon-search"></i>
-			</a>
-		</p>
-	</h2>
 	<h4>
 		<div ng-class="{'': state == 'list', 'none': state != 'list'}">
 			<p class="text-center">
@@ -91,36 +122,19 @@
 						<th scope="col"><spring:message code="videos.uploadDate" /></th>
 						<th scope="col"><spring:message code="videos.viewCount" /></th>
 						<th scope="col"><spring:message code="videos.duration" /></th>
-						<th scope="col"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="video in page.source">
+					<tr ng-repeat="video in page.source| filter:query | orderBy:orderProp">
 						<td class="tdVideosCentered">
 							<a title='videoDetail'
-								href="<c:url value='/protected/videoView/#/videos/{{video.id}}'/>"><p>
+								href="<c:url value='#/videos/{{video.id}}'/>" ng-click="handleClick(video);"><p>
 								{{video.name}}
 							</p></a>
 						</td>
 						<td class="tdVideosCentered">{{video.uploadDate}}</td>
 						<td class="tdVideosCentered">{{video.viewCount}}</td>
 						<td class="tdVideosCentered">{{video.duration}}</td>
-						<td class="width15">
-							<div class="text-center">
-								<input type="hidden" value="{{video.id}}" /> <a
-									href="#updateVideosModal" ng-click="selectedVideo(video);"
-									role="button"
-									title="<spring:message code="update"/>&nbsp;<spring:message code="video"/>"
-									class="btn btn-inverse" data-toggle="modal"> <i
-									class="icon-pencil"></i>
-								</a> <a href="#deleteVideosModal" ng-click="selectedVideo(video);"
-									role="button"
-									title="<spring:message code="delete"/>&nbsp;<spring:message code="video"/>"
-									class="btn btn-inverse" data-toggle="modal"> <i
-									class="icon-minus"></i>
-								</a>
-							</div>
-						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -154,20 +168,8 @@
 				</button>
 			</div>
 		</div>
-		<div
-			ng-class="{'text-center': displayCreateVideoButton == true, 'none': displayCreateVideoButton == false}">
-			<br /> <a href="#addVideosModal" role="button"
-				ng-click="resetVideo();"
-				title="<spring:message code='create'/>&nbsp;<spring:message code='video'/>"
-				class="btn btn-inverse" data-toggle="modal"> <i
-				class="icon-plus"></i> &nbsp;&nbsp;<spring:message code="create" />&nbsp;<spring:message
-					code="video" />
-			</a>
-		</div>
 
-		<jsp:include page="dialogs/videosDialogs.jsp" />
+		<jsp:include page="../../videos/dialogs/videosDialogs.jsp" />
 
 	</div>
 </div>
-
-<script src="<c:url value="/resources/js/pages/videosAdmin.js" />"></script>

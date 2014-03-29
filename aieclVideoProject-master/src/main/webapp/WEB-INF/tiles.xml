@@ -19,7 +19,7 @@
 	</definition>
 	
 	<definition name="videoView" extends="master.page">
-		<put-attribute name="body" value="/protected/videosView/videoView.jsp" />
+		<put-attribute name="body" value="/protected/videoView/videoView.jsp" />
 	</definition>
 
 	<definition name="videosAdmin" extends="master.page">

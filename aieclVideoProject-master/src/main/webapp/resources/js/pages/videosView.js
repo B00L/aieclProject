@@ -2,36 +2,351 @@ var videocatControllers = angular.module('videocatControllers', []);
 
 // Controller for videoDetail
 videocatControllers.controller('videoDetailController', [ '$scope', '$http',
-		'mySharedService', function($scope, $http, sharedService) {
+		'$routeParams', 'mySharedService',
+		function($scope, $http, $routeParams, sharedService) {
+		
+			$scope.state = '';	
+			$scope.lastAction = '';
+	
+			$scope.videoId = $routeParams.videoId;
+			$scope.url = "/aieclVideoProject/protected/videoView/";
+
+			$scope.errorOnSubmit = false;
+			$scope.errorIllegalAccess = false;
+			$scope.displayMessageToUser = false;
+			$scope.displayValidationError = false;
+			$scope.displaySearchMessage = false;
+			$scope.displaySearchButton = false;
+
+			$scope.videoId = $routeParams.videoId;
+			
+			$scope.getVideo = function() {
+				var url = $scope.url+$scope.videoId;
+				
+				$scope.lastAction = 'getVideo';
+				$scope.state = 'busy';
+				$scope.displayValidationError = false;
+				$("#loadingModal").modal('show');
+
+				$http.get(url).success(
+						function(data) {
+							$("#loadingModal").modal('hide');
+							$scope.lastAction = '';
+							$scope.state = '';
+							$scope.video = data;
+						}).error(function() {
+					$scope.state = 'error';
+				});
+			};
+			
 			$scope.$on('handleBroadcast', function() {
 				$scope.video = sharedService.video;
 			});
-			$scope.video = sharedService.video;
-			$scope.test = "bla";
+			
+			if(!$scope.video){
+				if(sharedService.video.id==$scope.videoId){
+					$scope.video = sharedService.video;
+				} else {
+					$scope.getVideo();
+				}				
+			}
+
 		} ]);
 
 videocatControllers.controller('VideoListCtrl', [ '$scope', '$http',
-		function($scope, $http) {
-			$http.get('videosFiles/videos.json').success(function(data) {
-				$scope.videos = data;
+		'mySharedService', function($scope, $http, sharedService) {
+			$scope.pageToGet = 0;
+			$scope.url = "/aieclVideoProject/protected/videosAdmin/";
+			var url = $scope.url;
+			var config = {
+				params : {
+					page : $scope.pageToGet
+				}
+			};
+
+			$http.get(url, config).success(function(data) {
+				$scope.videos = data.videos;
+			});
+
+			$scope.handleClick = function(video) {
+				sharedService.prepForBroadcast(video);
+			};
+
+			$scope.$on('handleBroadcast', function() {
+				$scope.video = sharedService.video;
 			});
 
 			$scope.orderProp = 'age';
 		} ]);
 
-videocatControllers.controller('VideoDetailCtrl', [ '$scope', '$routeParams',
-		function($scope, $routeParams) {
-			$scope.videoId = $routeParams.videoId;
-		} ]);
+videocatControllers
+		.controller(
+				'videosController',
+				[
+						'$scope',
+						'$http',
+						'mySharedService',
+						function($scope, $http, sharedService) {
+							$scope.pageToGet = 0;
+
+							$scope.state = 'busy';
+
+							$scope.lastAction = '';
+
+							$scope.url = "/aieclVideoProject/protected/videosAdmin/";
+
+							$scope.errorOnSubmit = false;
+							$scope.errorIllegalAccess = false;
+							$scope.displayMessageToUser = false;
+							$scope.displayValidationError = false;
+							$scope.displaySearchMessage = false;
+							$scope.displaySearchButton = false;
+							$scope.displayCreateVideoButton = false;
+
+							$scope.video = {};
+
+							$scope.searchFor = "";
+
+							$scope.getVideoList = function() {
+								var url = $scope.url;
+								$scope.lastAction = 'list';
+
+								$scope.startDialogAjaxRequest();
+
+								var config = {
+									params : {
+										page : $scope.pageToGet
+									}
+								};
+
+								$http.get(url, config).success(
+										function(data) {
+											$scope.finishAjaxCallOnSuccess(
+													data, null, false);
+										}).error(function() {
+									$scope.state = 'error';
+									$scope.displayCreateVideoButton = false;
+								});
+							};
+
+							$scope.populateTable = function(data) {
+								if (data.pagesCount > 0) {
+									$scope.state = 'list';
+
+									$scope.page = {
+										source : data.videos,
+										currentPage : $scope.pageToGet,
+										pagesCount : data.pagesCount,
+										totalVideos : data.totalVideos
+									};
+
+									if ($scope.page.pagesCount <= $scope.page.currentPage) {
+										$scope.pageToGet = $scope.page.pagesCount - 1;
+										$scope.page.currentPage = $scope.page.pagesCount - 1;
+									}
+
+									$scope.displayCreateVideoButton = true;
+									$scope.displaySearchButton = true;
+								} else {
+									$scope.state = 'noresult';
+									$scope.displayCreateVideoButton = true;
+
+									if (!$scope.searchFor) {
+										$scope.displaySearchButton = false;
+									}
+								}
+
+								if (data.actionMessage || data.searchMessage) {
+									$scope.displayMessageToUser = $scope.lastAction != 'search';
+
+									$scope.page.actionMessage = data.actionMessage;
+									$scope.page.searchMessage = data.searchMessage;
+								} else {
+									$scope.displayMessageToUser = false;
+								}
+							};
+
+							$scope.changePage = function(page) {
+								$scope.pageToGet = page;
+
+								if ($scope.searchFor) {
+									$scope.search($scope.searchFor, true);
+								} else {
+									$scope.getVideoList();
+								}
+							};
+
+							$scope.exit = function(modalId) {
+								$(modalId).modal('hide');
+
+								$scope.video = {};
+								$scope.errorOnSubmit = false;
+								$scope.errorIllegalAccess = false;
+								$scope.displayValidationError = false;
+							};
+
+							$scope.finishAjaxCallOnSuccess = function(data,
+									modalId, isPagination) {
+								$scope.populateTable(data);
+								$("#loadingModal").modal('hide');
+
+								if (!isPagination) {
+									if (modalId) {
+										$scope.exit(modalId);
+									}
+								}
+
+								$scope.lastAction = '';
+							};
+
+							$scope.startDialogAjaxRequest = function() {
+								$scope.displayValidationError = false;
+								$("#loadingModal").modal('show');
+								$scope.previousState = $scope.state;
+								$scope.state = 'busy';
+							};
+
+							$scope.handleErrorInDialogs = function(status) {
+								$("#loadingModal").modal('hide');
+								$scope.state = $scope.previousState;
+
+								// illegal access
+								if (status == 403) {
+									$scope.errorIllegalAccess = true;
+									return;
+								}
+
+								$scope.errorOnSubmit = true;
+								$scope.lastAction = '';
+							};
+
+							$scope.addSearchParametersIfNeeded = function(
+									config, isPagination) {
+								if (!config.params) {
+									config.params = {};
+								}
+
+								config.params.page = $scope.pageToGet;
+
+								if ($scope.searchFor) {
+									config.params.searchFor = $scope.searchFor;
+								}
+							};
+
+							$scope.resetVideo = function() {
+								$scope.video = {};
+							};
+
+							$scope.createVideo = function(newVideoForm) {
+								if (!newVideoForm.$valid) {
+									$scope.displayValidationError = true;
+									return;
+								}
+
+								$scope.lastAction = 'create';
+
+								var url = $scope.url;
+
+								var config = {
+									headers : {
+										'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
+									}
+								};
+
+								$scope.addSearchParametersIfNeeded(config,
+										false);
+
+								$scope.startDialogAjaxRequest();
+
+								$http
+										.post(url, $.param($scope.video),
+												config)
+										.success(
+												function(data) {
+													$scope
+															.finishAjaxCallOnSuccess(
+																	data,
+																	"#addVideosModal",
+																	false);
+												})
+										.error(
+												function(data, status, headers,
+														config) {
+													$scope
+															.handleErrorInDialogs(status);
+												});
+							};
+
+							$scope.selectedVideo = function(video) {
+								var selectedVideo = angular.copy(video);
+								$scope.video = selectedVideo;
+							};
+
+							$scope.searchVideo = function(searchVideoForm,
+									isPagination) {
+								if (!($scope.searchFor)
+										&& (!searchVideoForm.$valid)) {
+									$scope.displayValidationError = true;
+									return;
+								}
+
+								$scope.lastAction = 'search';
+
+								var url = $scope.url + $scope.searchFor;
+
+								$scope.startDialogAjaxRequest();
+
+								var config = {};
+								$scope.addSearchParametersIfNeeded(config,
+										isPagination);
+
+								$http
+										.get(url, config)
+										.success(
+												function(data) {
+													$scope
+															.finishAjaxCallOnSuccess(
+																	data,
+																	"#searchVideosModal",
+																	isPagination);
+													$scope.displaySearchMessage = true;
+												})
+										.error(
+												function(data, status, headers,
+														config) {
+													$scope
+															.handleErrorInDialogs(status);
+												});
+							};
+
+							$scope.resetSearch = function() {
+								$scope.searchFor = "";
+								$scope.pageToGet = 0;
+								$scope.getVideoList();
+								$scope.displaySearchMessage = false;
+							};
+
+							$scope.handleClick = function(video) {
+								sharedService.prepForBroadcast(video);
+							};
+
+							$scope.$on('handleBroadcast', function() {
+								$scope.video = sharedService.video;
+							});
+
+							$scope.getVideoList();
+						} ]);
 
 videocatControllers.config([ '$routeProvider', function($routeProvider) {
-	$routeProvider
-	.when('/videolist', {
-		templateUrl : 'videosView/partials/videoList.html',
+	$routeProvider.when('/videolist', {
+		templateUrl : 'partials/videoList.jsp',
+		controller : 'VideoListCtrl'
+	}).when('/', {
+		templateUrl : 'partials/videoList.jsp',
 		controller : 'VideoListCtrl'
 	}).when('/videos/:videoId', {
-		templateUrl : 'videosView/partials/videoDetail.html',
-		controller : 'VideoDetailCtrl'
+		templateUrl : 'partials/videoDetail.html',
+		controller : 'videoDetailController'
 	}).otherwise({
 		redirectTo : 'partials/error.html'
 	});
