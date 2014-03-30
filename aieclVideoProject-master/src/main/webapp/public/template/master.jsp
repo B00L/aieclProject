@@ -7,6 +7,10 @@
 <title><spring:message code="project.title" /></title>
 <link href="<c:url value='/resources/css/bootstrap.min.css'  />"
 	rel="stylesheet" />
+<link 
+	rel="shortcut icon" 
+	href="<c:url value='/resources/img/icon_16.png'  />"
+	type="image/x-icon" />
 <link
 	href="<c:url value='/resources/css/bootstrap-responsive.min.css'  />"
 	rel="stylesheet" />
