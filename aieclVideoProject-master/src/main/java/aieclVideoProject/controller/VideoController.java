@@ -1,5 +1,6 @@
 package aieclVideoProject.controller;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import aieclVideoProject.model.Video;
@@ -39,5 +41,14 @@ public class VideoController {
 		videoService.save(video);
 		return new ResponseEntity<Video>(video, HttpStatus.OK);
 	}
+	
+    //Featured
+    @RequestMapping("/featured")
+    public @ResponseBody Video featured() {
+        Video v = new Video();
+        v.setName("bla"+RandomStringUtils.random(0));
+        v.setVideoPath("videosFiles/TestVid.mp4");
+    	return v;
+    }
 	
 }

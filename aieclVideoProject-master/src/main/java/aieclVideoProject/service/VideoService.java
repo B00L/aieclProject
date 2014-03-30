@@ -31,6 +31,7 @@ public class VideoService {
 		return buildResult(result);
 	}
 
+	@Secured("ROLE_ADMIN")
 	public void save(Video video) {
 		videoRepository.save(video);
 	}

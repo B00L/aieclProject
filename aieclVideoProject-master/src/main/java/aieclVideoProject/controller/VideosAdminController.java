@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import aieclVideoProject.model.Video;
 import aieclVideoProject.service.VideoService;
 import aieclVideoProject.vo.VideoListVO;
 
+
 @Controller
 @RequestMapping(value= "protected/videosAdmin")
 public class VideosAdminController {
@@ -36,8 +38,9 @@ public class VideosAdminController {
 	private MessageSource messageSource;
 	
 	@Value("5")
-	private int maxResults;
+	private int maxResults;	
 	
+	//@Secured("ROLE_ADMIN")
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView welcome(){
 		return new ModelAndView("videosAdmin");
@@ -163,16 +166,6 @@ public class VideosAdminController {
 
     private boolean isSearchActivated(String searchFor) {
         return !StringUtils.isEmpty(searchFor);
-    }
-	
-    
-    //Featured
-    @RequestMapping("/featured")
-    public @ResponseBody Video featured() {
-        Video v = new Video();
-        v.setName("bla"+RandomStringUtils.random(0));
-        v.setVideoPath("videosFiles/TestVid.mp4");
-    	return v;
     }
     
 }
