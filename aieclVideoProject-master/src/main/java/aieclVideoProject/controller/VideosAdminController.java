@@ -78,7 +78,7 @@ public class VideosAdminController {
 			return search(searchFor, page, locale, "message.update.success");
 		}
 		
-		return createListAllResponse(page, locale, "message.update.succes");
+		return createListAllResponse(page, locale, "message.update.success");
 	}
 	
 	@RequestMapping(value = "/{videoId}", method = RequestMethod.DELETE, produces = "application/json")
