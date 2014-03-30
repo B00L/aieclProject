@@ -166,9 +166,9 @@ public class VideosAdminController {
     }
 	
     
-    //Tests
-    @RequestMapping("/greeting")
-    public @ResponseBody Video greeting() {
+    //Featured
+    @RequestMapping("/featured")
+    public @ResponseBody Video featured() {
         Video v = new Video();
         v.setName("bla"+RandomStringUtils.random(0));
         v.setVideoPath("videosFiles/TestVid.mp4");
