@@ -3,18 +3,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
-	<!--Barre de recherche-->       
+<!-- <div>
+	Barre de recherche       
 	Rechercher: <input ng-model="query">
 	Trier par:
 	<select ng-model="orderProp">
 	    <option value="name">Par ordre alphabétique</option>
 	    <option value="age">Le plus récent en premier</option>
 	</select>
-</div>
+</div> -->
 
-<div>
-    <!--Body content-->
+<!-- <div>
+    Body content
 
     <ul class="videos">
         <li ng-repeat="video in videos| filter:query | orderBy:orderProp" class="thumbnail">
@@ -41,7 +41,7 @@
         </li>
     </ul>
 
-</div>
+</div> -->
 
 
 <div class="row-fluid" ng-controller="videosController">
